@@ -12,7 +12,7 @@ import Vision
 class OCR {
     /// The array of `RecognizedTextObservation` objects to hold the request's results.
     var observations = [RecognizedTextObservation]()
-    var ibans: [Iban] = []
+    var ibans: [IBAN] = []
 
     /// The Vision request.
     var request = RecognizeTextRequest()
@@ -20,6 +20,7 @@ class OCR {
     func performOCR(imageData: Data) async throws {
         /// Clear the `observations` array for photo recapture.
         observations.removeAll()
+        request.recognitionLevel = .accurate
 
         /// Perform the request on the image data and return the results.
         let results = try await request.perform(on: imageData)
@@ -45,7 +46,7 @@ class OCR {
             }
             if let range = text.range(of: "TR") {
                 if recognizedIban.count == 26 && recognizedIban.isIbanValid() {
-                    self.ibans.append(Iban(iban: recognizedIban))
+                    self.ibans.append(IBAN(string: recognizedIban))
                 }
                 recognizedIban = ""
                 let index = text.distance(from: text.startIndex, to: range.lowerBound)
@@ -56,9 +57,9 @@ class OCR {
             }
             if recognizedIban.count == 26 && recognizedIban.isIbanValid() {
                 if !self.ibans.contains(where: {
-                    $0.iban == recognizedIban
+                    $0.ibanString == recognizedIban
                 }) {
-                    self.ibans.append(Iban(iban: recognizedIban))
+                    self.ibans.append(IBAN(string: recognizedIban))
                 }
                 recognizedIban = ""
             }

@@ -7,16 +7,16 @@
 
 import Foundation
 
-struct Iban {
-    let iban: String
+struct IBAN {
+    let ibanString: String
     var countryCode: String {
-        iban.prefix(2).uppercased()
+        ibanString.prefix(2).uppercased()
     }
     var controlNumber: String?
     var bankCode: String {
-        let startIndex = iban.index(iban.startIndex, offsetBy: 6)
-        let endIndex = iban.index(startIndex, offsetBy: 3)
-        return String(iban[startIndex..<endIndex])
+        let startIndex = ibanString.index(ibanString.startIndex, offsetBy: 6)
+        let endIndex = ibanString.index(startIndex, offsetBy: 3)
+        return String(ibanString[startIndex..<endIndex])
     }
     var branchCode: String?
     var accountNumber: String?
@@ -25,7 +25,7 @@ struct Iban {
         BankCode(rawValue: bankCode)?.name
     }
     
-    init(iban: String) {
-        self.iban = iban.uppercased().filter({!$0.isWhitespace})
+    init(string: String) {
+        self.ibanString = string.uppercased().filter({!$0.isWhitespace})
     }
 }

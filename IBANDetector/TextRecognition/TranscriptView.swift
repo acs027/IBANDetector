@@ -18,9 +18,9 @@ struct TranscriptView: View {
                     ContentUnavailableView.init("No result", systemImage: "magnifyingglass", description: Text("Couldn't find any IBAN in image."))
                 } else {
                     List {
-                        ForEach(imageOCR.ibans, id: \.iban) { iban in
+                        ForEach(imageOCR.ibans, id: \.ibanString) { iban in
                             VStack(alignment: .leading) {
-                                Text(iban.iban)
+                                Text(iban.ibanString)
                                 Text(iban.bankName ?? "")
                             }
                         }
