@@ -1,9 +1,3 @@
-/*
-See the LICENSE.txt file for this sample’s licensing information.
-
-Abstract:
-Displays the captured image's text.
-*/
 
 import SwiftUI
 import Vision

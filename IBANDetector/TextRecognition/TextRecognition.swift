@@ -1,9 +1,3 @@
-/*
-See the LICENSE.txt file for this sample’s licensing information.
-
-Abstract:
-Provides the class for the text recognition and the structure to create the bounding boxes.
-*/
 
 import SwiftUI
 import Vision
